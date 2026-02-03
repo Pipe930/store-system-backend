@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IAuthService } from "../../service/auth/IAuth.interface";
 //Aqui solo manejasmos las rtestpuestas HTTP
-export class Auth {
+export class AuthController {
   //En el constructor va el argumento que maneja las acciones del servicio con su debida interface
   constructor(private readonly authService: IAuthService) {}
   public getAction = async (req: Request, res: Response) => {
