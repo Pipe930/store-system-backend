@@ -9,6 +9,7 @@ const {
   DB_PASSWORD,
   DB_USER,
   JWT_SECRET_KEY,
+  DATABASE_URL
 } = process.env;
 
 export {
@@ -19,4 +20,5 @@ export {
   DB_PASSWORD,
   DB_USER,
   JWT_SECRET_KEY,
+  DATABASE_URL
 };
