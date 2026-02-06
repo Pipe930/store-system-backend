@@ -1,10 +1,18 @@
 services:
   app:
-    build: .
-    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: store-system-backend
     image: store-system-backend:1.0.0
     env_file:
       - .env
     ports:
       - "8080:8080"
-    command: pnpm run start
+    volumes:
+      - ./data:/app/data
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/prod.db
+    restart: unless-stopped
+    command: sh -c "pnpm exec prisma migrate deploy && pnpm run start"
