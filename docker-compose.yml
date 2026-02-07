@@ -1,15 +1,7 @@
 services:
-<<<<<<< Updated upstream
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: store-system-backend
-=======
   backend:
     build: .
     container_name: backend
->>>>>>> Stashed changes
     image: store-system-backend:1.0.0
     deploy:
       resources:
