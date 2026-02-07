@@ -1,12 +1,11 @@
 import { prisma } from "../../config/prisma";
 import { JWT } from "../../helpers/jwt";
-import {
-  instanceNotFoundError,
-  instanceUnauthorizedError,
-} from "../../helpers/errors/errors";
 import { IAuthService, IUser, ILoginPost, IEmployeeInfo } from "./IAuth.interface";
+import { NotFoundError, UnauthorizedError } from "../../helpers/errors/error";
+
 //Aqui va la regla de negocio, las consultas en tus bases de datos y tus querys.
 //Trata de que cada accion distinta se implemente en metodos separados
+
 export class AuthService implements IAuthService {
   constructor() {}
 
@@ -23,10 +22,10 @@ export class AuthService implements IAuthService {
       },
     });
 console.log(user)
-    if (!user) throw instanceNotFoundError("Usuario no encontrado");
+    if (!user) throw new NotFoundError("user not found");
 
     //tambien aqui puedes generar tur errores personalizaados si el usuario no existe, esta dado debaja, etc/
-    if (!user.isActive) throw instanceUnauthorizedError("Usuario dado de baja");
+    if (!user.isActive) throw new UnauthorizedError("Usuario dado de baja");
 
     return "ok";
   }

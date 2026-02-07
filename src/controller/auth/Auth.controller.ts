@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { IAuthService } from "../../service/auth/IAuth.interface";
+import { HttpError, NotFoundError } from "../../helpers/errors/error";
 //Aqui solo manejasmos las rtestpuestas HTTP
 
-export class AuthController{
-
+export class AuthController {
   //En el constructor va el argumento que maneja las acciones del servicio con su debida interface
   constructor(private readonly authService: IAuthService) {}
 
@@ -16,30 +16,15 @@ export class AuthController{
       });
     } catch (error: unknown) {
       //manejas tus errores personalizado
-      if (error instanceof Error && error.name == "Nor Found") {
-        res.status(404).json({
-          status: 404,
+      if (error instanceof HttpError) {
+        res.status(error.httpCode).json({
+          status: error.httpCode,
           name: error.name,
           msg: error.message,
         });
       }
-
-       if (error instanceof Error && error.name == "Unauthorized") {
-        res.status(401).json({
-          status: 401,
-          name: error.name,
-          msg: error.message,
-        });
-      }
-      //error general 500
-      res.status(500).json({
-        status: 500,
-        msg: "Error en el servidor",
-      });
     }
   };
 
-  public registerPost= async( req:Request, res:Response)=>{
-
-  }
+  public registerPost = async (req: Request, res: Response) => {};
 }

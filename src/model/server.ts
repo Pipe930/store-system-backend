@@ -1,7 +1,7 @@
 import express from "express";
 import AuthRouter from '../router/auth.router';
-
-//Este es la clase server el cual se esta ejecutando en el archivo app.ts 
+import chalk from "chalk";
+//Este es la clase server el cual se esta ejecutando en el archivo app.ts
 export class Server {
   private readonly app = express();
   private readonly port: number;
@@ -28,7 +28,7 @@ export class Server {
 
   public listen() {
     this.app.listen(this.port, () => {
-      console.log(`Servidor levantado en puerto: ${this.port}`);
+      console.log(chalk.bgBlue.green(`Servidor levantado en puerto: http://localhost:${this.port}`));
     });
   }
 }
